@@ -27,7 +27,7 @@
 <nav class="navbar navbar-inverse navbar-expand-lg" id="asd">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}">AITU</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}"><img style="width: 60px;" src="https://astanait.edu.kz/wp-content/uploads/2020/05/aitu-logo-white-2-300x154.png"></a>
             <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
