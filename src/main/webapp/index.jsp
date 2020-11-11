@@ -16,7 +16,7 @@
                 Thus, a modern digital educational environment will be created, and AITU will become a catalyst for the digital transformation of the entire Kazakh society.
             </h4>
 
-            <img class="col-md-6 rounded-circle border border-primary"
+            <img style="width: 50%" class="col-md-6 rounded-circle border border-primary"
                  src="https://astanait.edu.kz/wp-content/uploads/2020/05/aitu-logo-3-400x205.png">
         </div>
     </div>

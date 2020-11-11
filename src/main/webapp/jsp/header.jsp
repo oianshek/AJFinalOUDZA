@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Patua+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainstyle.css">
     <script>
-        <%@include file="../js/javascript.js"%>
+        <%@include file="../script/javascript.js"%>
     </script>
 </head>
 <body class="d-flex flex-column h-100">
@@ -38,10 +38,6 @@
                 <li><a href="${pageContext.request.contextPath}/jsp/Sport.jsp">News</a></li>
                 <li><a href="${pageContext.request.contextPath}/jsp/Gadgets.jsp">Clubs</a></li>
                 <li><a href="${pageContext.request.contextPath}/jsp/Clothes.jsp">Events</a></li>
-
-                <c:if test="${cookie.user.value != null}">
-
-                </c:if>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
