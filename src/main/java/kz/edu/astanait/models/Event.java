@@ -1,8 +1,6 @@
 package kz.edu.astanait.models;
 
-import kz.edu.astanait.models.interfaces.Post;
-
-import java.util.Date;
+import java.sql.Date;
 
 public class Event extends Post {
     private Date date;
@@ -11,6 +9,13 @@ public class Event extends Post {
         super(name, image, description, author);
         setDate(date);
     }
+
+    public Event(int id, String name, String image, String description,String author,Date date) {
+        super(id,name,image,description,author);
+        setDate(date);
+    }
+
+
     public void setDate(Date date) {
         this.date = date;
     }

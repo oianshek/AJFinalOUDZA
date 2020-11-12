@@ -6,10 +6,7 @@ import kz.edu.astanait.models.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -37,8 +34,13 @@ public class LoginServlet extends HttpServlet {
                     else
                     {
                         list.put("message", "success");
+
+                        Cookie userName = new Cookie("user", u.getFirstName());
+                        userName.setMaxAge(60*5*60);
+                        response.addCookie(userName);
+
                         HttpSession sessions = request.getSession();
-                        sessions.setAttribute("user", u.getEmail());
+                        sessions.setAttribute("user", u);
                     }
                 } catch (SQLException throwables) {
                     list.put("message", "Sql error");

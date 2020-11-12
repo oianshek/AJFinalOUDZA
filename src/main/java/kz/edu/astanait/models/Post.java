@@ -1,4 +1,4 @@
-package kz.edu.astanait.models.interfaces;
+package kz.edu.astanait.models;
 
 public class Post {
     private int id;
@@ -8,6 +8,14 @@ public class Post {
     private String author;
 
     public Post(String name, String image, String description, String author){
+        setName(name);
+        setImage(image);
+        setDescription(description);
+        setAuthor(author);
+    }
+
+    public Post(int id,String name, String image, String description, String author){
+        setId(id);
         setName(name);
         setImage(image);
         setDescription(description);

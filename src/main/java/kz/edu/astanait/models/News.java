@@ -1,7 +1,5 @@
 package kz.edu.astanait.models;
 
-import kz.edu.astanait.models.interfaces.Post;
-
 import java.util.Date;
 
 public class News extends Post {
