@@ -44,6 +44,7 @@ public class UserController implements IController<User> {
 
         if(rs.next()){
             user = new User();
+            user.setId(rs.getInt("id"));
             user.setFirstName(rs.getString("fname"));
             user.setLastName(rs.getString("lname"));
             user.setGroupName(rs.getString("group_name"));

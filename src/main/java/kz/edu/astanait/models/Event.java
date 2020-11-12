@@ -15,7 +15,6 @@ public class Event extends Post {
         setDate(date);
     }
 
-
     public void setDate(Date date) {
         this.date = date;
     }

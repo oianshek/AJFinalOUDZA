@@ -3,6 +3,7 @@ package kz.edu.astanait.controllers;
 import kz.edu.astanait.DB;
 import kz.edu.astanait.controllers.interfaces.IController;
 import kz.edu.astanait.models.Event;
+import kz.edu.astanait.models.News;
 
 import javax.ws.rs.BadRequestException;
 import java.sql.PreparedStatement;
@@ -12,11 +13,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventController implements IController<Event> {
+public class NewsController implements IController<News> {
 
     @Override
-    public void add(Event entity) throws BadRequestException {
-        String sql = "INSERT INTO events(name, image, description, date, author)"+
+    public void add(News entity) throws BadRequestException {
+        String sql = "INSERT INTO news(name, image, description, date, author)"+
                 "VALUES(?,?,?,?,?)";
 
         try {
@@ -35,8 +36,8 @@ public class EventController implements IController<Event> {
     }
 
     @Override
-    public void update(Event entity) throws BadRequestException {
-        String sql = "UPDATE event SET name = ?, image = ?, description = ?, date = ?, author = ?" +
+    public void update(News entity) throws BadRequestException {
+        String sql = "UPDATE news SET name = ?, image = ?, description = ?, date = ?, author = ?" +
                 " WHERE id = ?";
 
         try {
@@ -56,8 +57,8 @@ public class EventController implements IController<Event> {
     }
 
     @Override
-    public void delete(Event entity) throws BadRequestException {
-        String sql = "DELETE from event WHERE id = ?";
+    public void delete(News entity) throws BadRequestException {
+        String sql = "DELETE from news WHERE id = ?";
 
         try {
             PreparedStatement stmt = DB.getConnection().prepareStatement(sql);
@@ -70,15 +71,15 @@ public class EventController implements IController<Event> {
     }
 
     @Override
-    public List<Event> getAll() throws BadRequestException {
-        List<Event>events = new ArrayList<>();
+    public List<News> getAll() throws BadRequestException {
+        List<News> news = new ArrayList<>();
 
         try {
             Statement stmt = DB.getConnection().createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM event");
 
             while (rs.next()){
-                events.add(new Event(
+                news.add(new News(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("image"),
@@ -90,12 +91,11 @@ public class EventController implements IController<Event> {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return events;
+        return news;
     }
 
     @Override
-    public Event check(String email, String password) throws SQLException {
-
+    public News check(String email, String password) throws SQLException {
         return null;
     }
 }

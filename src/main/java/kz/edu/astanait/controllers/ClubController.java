@@ -2,6 +2,7 @@ package kz.edu.astanait.controllers;
 
 import kz.edu.astanait.DB;
 import kz.edu.astanait.controllers.interfaces.IController;
+import kz.edu.astanait.models.Club;
 import kz.edu.astanait.models.Event;
 
 import javax.ws.rs.BadRequestException;
@@ -12,32 +13,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventController implements IController<Event> {
+public class ClubController implements IController<Club> {
 
     @Override
-    public void add(Event entity) throws BadRequestException {
-        String sql = "INSERT INTO events(name, image, description, date, author)"+
-                "VALUES(?,?,?,?,?)";
-
-        try {
-            PreparedStatement stmt = DB.getConnection().prepareStatement(sql);
-
-            stmt.setString(1,entity.getName());
-            stmt.setString(2,entity.getImage());
-            stmt.setString(3,entity.getDescription());
-            stmt.setDate(4, entity.getDate());
-            stmt.setString(5, entity.getAuthor());
-
-            stmt.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-    }
-
-    @Override
-    public void update(Event entity) throws BadRequestException {
-        String sql = "UPDATE event SET name = ?, image = ?, description = ?, date = ?, author = ?" +
-                " WHERE id = ?";
+    public void add(Club entity) throws BadRequestException {
+        String sql = "INSERT INTO club(name, image, description, author) "+
+                "VALUES(?,?,?,?)";
 
         try {
             PreparedStatement stmt = DB.getConnection().prepareStatement(sql);
@@ -45,19 +26,38 @@ public class EventController implements IController<Event> {
             stmt.setString(1, entity.getName());
             stmt.setString(2, entity.getImage());
             stmt.setString(3, entity.getDescription());
-            stmt.setDate(4, entity.getDate());
-            stmt.setString(5, entity.getAuthor());
-            stmt.setInt(6, entity.getId());
+            stmt.setString(4, entity.getAuthor());
 
             stmt.execute();
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
+
+    @Override
+    public void update(Club entity) throws BadRequestException {
+        String sql = "update club set name = ?, image = ?, description = ?, author = ? where id = ?";
+        PreparedStatement stmt = null;
+        try {
+
+            stmt = DB.getConnection().prepareStatement(sql);
+
+            stmt.setString(1, entity.getName());
+            stmt.setString(2, entity.getImage());
+            stmt.setString(3, entity.getDescription());
+            stmt.setString(4, entity.getAuthor());
+            stmt.setInt(5, entity.getId());
+
+            stmt.execute();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
     @Override
-    public void delete(Event entity) throws BadRequestException {
-        String sql = "DELETE from event WHERE id = ?";
+    public void delete(Club entity) throws BadRequestException {
+        String sql = "DELETE from club WHERE id = ?";
 
         try {
             PreparedStatement stmt = DB.getConnection().prepareStatement(sql);
@@ -70,31 +70,29 @@ public class EventController implements IController<Event> {
     }
 
     @Override
-    public List<Event> getAll() throws BadRequestException {
-        List<Event>events = new ArrayList<>();
+    public List getAll() throws BadRequestException {
+        List<Club> clubs = new ArrayList<>();
 
         try {
             Statement stmt = DB.getConnection().createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM event");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM club");
 
             while (rs.next()){
-                events.add(new Event(
+                clubs.add(new Club(
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("image"),
                         rs.getString("description"),
-                        rs.getString("author"),
-                        rs.getDate("date")
-                ));
+                        rs.getString("author")));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return events;
+        return clubs;
     }
 
     @Override
-    public Event check(String email, String password) throws SQLException {
+    public Club check(String email, String password) throws SQLException {
 
         return null;
     }

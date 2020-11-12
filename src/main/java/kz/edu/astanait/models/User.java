@@ -1,6 +1,7 @@
 package kz.edu.astanait.models;
 
 public class User {
+    private int id;
     private String email;
     private String password;
     private String firstName;
@@ -8,6 +9,15 @@ public class User {
     private String groupName;
 
     public User(String email, String password,String firstName, String lastName, String groupName) {
+        setEmail(email);
+        setPassword(password);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setGroupName(groupName);
+    }
+
+    public User(int id, String email, String password,String firstName, String lastName, String groupName) {
+        setId(id);
         setEmail(email);
         setPassword(password);
         setFirstName(firstName);
@@ -57,5 +67,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
