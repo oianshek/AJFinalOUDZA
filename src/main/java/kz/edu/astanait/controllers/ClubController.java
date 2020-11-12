@@ -83,7 +83,8 @@ public class ClubController implements IController<Club> {
                         rs.getString("name"),
                         rs.getString("image"),
                         rs.getString("description"),
-                        rs.getString("author")));
+                        rs.getString("author"),
+                        rs.getDate("date")));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -91,9 +92,4 @@ public class ClubController implements IController<Club> {
         return clubs;
     }
 
-    @Override
-    public Club check(String email, String password) throws SQLException {
-
-        return null;
-    }
 }

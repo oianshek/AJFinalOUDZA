@@ -2,6 +2,7 @@ package kz.edu.astanait.controllers;
 
 import kz.edu.astanait.DB;
 import kz.edu.astanait.controllers.interfaces.IController;
+import kz.edu.astanait.models.Club;
 import kz.edu.astanait.models.Event;
 
 import javax.ws.rs.BadRequestException;
@@ -84,8 +85,7 @@ public class EventController implements IController<Event> {
                         rs.getString("image"),
                         rs.getString("description"),
                         rs.getString("author"),
-                        rs.getDate("date")
-                ));
+                        rs.getDate("date")));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -93,9 +93,4 @@ public class EventController implements IController<Event> {
         return events;
     }
 
-    @Override
-    public Event check(String email, String password) throws SQLException {
-
-        return null;
-    }
 }

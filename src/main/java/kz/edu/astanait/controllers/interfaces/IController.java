@@ -11,5 +11,4 @@ public interface IController<T>{
     void update(T entity) throws BadRequestException;
     void delete(T entity) throws BadRequestException;
     List<T> getAll() throws BadRequestException;
-    T check(String email, String password) throws SQLException;
 }

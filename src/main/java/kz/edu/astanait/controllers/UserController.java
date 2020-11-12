@@ -31,7 +31,6 @@ public class UserController implements IController<User> {
         return null;
     }
 
-    @Override
     public User check(String email, String password) throws SQLException {
         String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
 

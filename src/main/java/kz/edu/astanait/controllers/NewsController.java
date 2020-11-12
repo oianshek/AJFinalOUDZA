@@ -2,7 +2,6 @@ package kz.edu.astanait.controllers;
 
 import kz.edu.astanait.DB;
 import kz.edu.astanait.controllers.interfaces.IController;
-import kz.edu.astanait.models.Event;
 import kz.edu.astanait.models.News;
 
 import javax.ws.rs.BadRequestException;
@@ -76,7 +75,7 @@ public class NewsController implements IController<News> {
 
         try {
             Statement stmt = DB.getConnection().createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM event");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM news");
 
             while (rs.next()){
                 news.add(new News(
@@ -94,8 +93,4 @@ public class NewsController implements IController<News> {
         return news;
     }
 
-    @Override
-    public News check(String email, String password) throws SQLException {
-        return null;
-    }
 }

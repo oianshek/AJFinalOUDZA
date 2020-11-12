@@ -1,25 +1,30 @@
 package kz.edu.astanait.models;
 
+import java.sql.Date;
+
 public class Post {
     private int id;
     private String name;
     private String image;
     private String description;
     private String author;
+    private Date date;
 
-    public Post(String name, String image, String description, String author){
+    public Post(String name, String image, String description, String author, Date date){
         setName(name);
         setImage(image);
         setDescription(description);
         setAuthor(author);
+        setDate(date);
     }
 
-    public Post(int id,String name, String image, String description, String author){
+    public Post(int id,String name, String image, String description, String author, Date date){
         setId(id);
         setName(name);
         setImage(image);
         setDescription(description);
         setAuthor(author);
+        setDate(date);
     }
 
     public int getId() {
@@ -60,5 +65,13 @@ public class Post {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
