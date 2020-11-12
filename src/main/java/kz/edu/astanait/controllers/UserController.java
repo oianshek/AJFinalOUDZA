@@ -1,7 +1,7 @@
 package kz.edu.astanait.controllers;
 
 import kz.edu.astanait.DB;
-import kz.edu.astanait.controllers.interfaces.IUserController;
+import kz.edu.astanait.controllers.interfaces.IController;
 import kz.edu.astanait.models.User;
 
 import javax.ws.rs.BadRequestException;
@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class UserController implements IUserController {
+public class UserController implements IController<User> {
 
     @Override
     public void add(User entity) throws BadRequestException {
@@ -27,7 +27,7 @@ public class UserController implements IUserController {
     }
 
     @Override
-    public List<User> getAll() throws BadRequestException {
+    public List getAll() throws BadRequestException {
         return null;
     }
 
@@ -52,4 +52,30 @@ public class UserController implements IUserController {
         }
         return user;
     }
+
+    public User getById(int id) {
+        String sql = "SELECT * FROM users WHERE id = ?";
+
+        try {
+            //Statement stmt = db.getConnection().createStatement();
+            PreparedStatement pstmt = DB.getConnection().prepareStatement(sql);
+            //ResultSet rs = stmt.executeQuery(sql);
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                User user = new User();
+                user.setFirstName(rs.getString("fname"));
+                user.setLastName(rs.getString("lname"));
+                user.setGroupName(rs.getString("group_name"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                return user;
+
+            }
+        } catch (SQLException ex) {
+            throw new BadRequestException("Cannot run SQL statement: " + ex.getMessage());
+        }
+        return null;
+    }
+
 }
