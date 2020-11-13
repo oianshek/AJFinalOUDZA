@@ -56,13 +56,13 @@ public class ClubController implements IController<Club> {
     }
 
     @Override
-    public void delete(Club entity) throws BadRequestException {
+    public void delete(int id) throws BadRequestException {
         String sql = "DELETE from club WHERE id = ?";
 
         try {
             PreparedStatement stmt = DB.getConnection().prepareStatement(sql);
 
-            stmt.setInt(1,entity.getId());
+            stmt.setInt(1, id);
             stmt.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

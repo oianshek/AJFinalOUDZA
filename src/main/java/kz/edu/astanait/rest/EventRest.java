@@ -1,24 +1,24 @@
 package kz.edu.astanait.rest;
 
-import kz.edu.astanait.controllers.ClubController;
-import kz.edu.astanait.controllers.UserController;
-import kz.edu.astanait.models.Club;
+import kz.edu.astanait.controllers.EventController;
+import kz.edu.astanait.models.Event;
+import kz.edu.astanait.models.News;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("/club")
-public class ClubRest {
-    private final ClubController clubController = new ClubController();
+@Path("/event")
+public class EventRest {
+    private final EventController eventController = new EventController();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
-        List<Club> clubs;
+        List<Event> event;
         try {
-            clubs = clubController.getAll();
+            event = eventController.getAll();
         } catch (BadRequestException e) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
@@ -26,15 +26,15 @@ public class ClubRest {
                     .build();
         }
         return Response
-                .ok(clubs)
+                .ok(event)
                 .build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response add(Club club) {
+    public Response add(Event event) {
         try {
-            clubController.add(club);
+            eventController.add(event);
         } catch (BadRequestException e) {
             return Response
                     .notModified()
@@ -42,15 +42,15 @@ public class ClubRest {
                     .build();
         }
         return Response
-                .ok("New club added successfully.")
+                .ok("New event added successfully.")
                 .build();
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response update(Club club) {
+    public Response update(Event event) {
         try {
-            clubController.update(club);
+            eventController.update(event);
         } catch (BadRequestException e) {
             return Response
                     .notModified()
@@ -58,7 +58,7 @@ public class ClubRest {
                     .build();
         }
         return Response
-                .ok("Club updated successfully.")
+                .ok("Event updated successfully.")
                 .build();
     }
 
@@ -67,15 +67,15 @@ public class ClubRest {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response delete(@PathParam("id") int id) {
         try{
-            clubController.delete(id);
+            eventController.delete(id);
         } catch (BadRequestException e) {
             return Response
                     .notModified()
-                    .entity("Club hasn't deleted.")
+                    .entity("Event hasn't deleted.")
                     .build();
         }
         return Response
-                .ok("Club deleted successfully.")
+                .ok("Event deleted successfully.")
                 .build();
     }
 }

@@ -57,13 +57,13 @@ public class EventController implements IController<Event> {
     }
 
     @Override
-    public void delete(Event entity) throws BadRequestException {
+    public void delete(int id) throws BadRequestException {
         String sql = "DELETE from event WHERE id = ?";
 
         try {
             PreparedStatement stmt = DB.getConnection().prepareStatement(sql);
 
-            stmt.setInt(1,entity.getId());
+            stmt.setInt(1, id);
             stmt.execute();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -1,5 +1,6 @@
 package kz.edu.astanait.rest;
 
+import kz.edu.astanait.models.Event;
 import kz.edu.astanait.models.User;
 import kz.edu.astanait.controllers.UserController;
 
@@ -7,53 +8,59 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.List;
 
 @Path("/users")
 public class UserRest {
-    private final UserController userController = new UserController();
-
-    @GET
-    public String index(){
-        return "Welcome to User list";
-    }
+    private static UserController userController = new UserController();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{param}")
-    public Response getByID(@PathParam("param") int userId) {
-        User u;
-        try {
-            u = userController.getById(userId);
-        } catch (ServerErrorException ex) {
-            return Response.serverError().build();
-        } catch (BadRequestException ex) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
-
-        if (u == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        } else {
-            return Response.ok(u).build();
-        }
-    }
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/all")
     public Response getAll() {
-        ArrayList<User> u;
+        List<User> user;
         try {
-            u = (ArrayList<User>) userController.getAll();
-        } catch (ServerErrorException ex) {
-            return Response.serverError().build();
-        } catch (BadRequestException ex) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
+            user = userController.getAll();
+        } catch (BadRequestException e) {
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage())
+                    .build();
         }
+        return Response
+                .ok(user)
+                .build();
+    }
 
-        if (u == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        } else {
-            return Response.ok(u).build();
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response update(User user) {
+        try {
+            userController.update(user);
+        } catch (BadRequestException e) {
+            return Response
+                    .notModified()
+                    .entity(e.getMessage())
+                    .build();
         }
+        return Response
+                .ok("User updated successfully.")
+                .build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") int id) {
+        try{
+            userController.delete(id);
+        } catch (BadRequestException e) {
+            return Response
+                    .notModified()
+                    .entity("User hasn't deleted.")
+                    .build();
+        }
+        return Response
+                .ok("User deleted successfully.")
+                .build();
     }
 }

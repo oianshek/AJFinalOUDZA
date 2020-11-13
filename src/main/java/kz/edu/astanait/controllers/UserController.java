@@ -22,7 +22,7 @@ public class UserController implements IController<User> {
     }
 
     @Override
-    public void delete(User entity) throws BadRequestException {
+    public void delete(int id) throws BadRequestException {
 
     }
 
