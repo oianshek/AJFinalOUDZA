@@ -12,7 +12,7 @@ public class Logout extends HttpServlet {
         session.removeAttribute("user");
 
         Cookie[] cookies = request.getCookies();
-        for(int a = 0; a<cookies.length; a++)
+        for(int a = 0; a < cookies.length; a++)
         {
             cookies[a].setValue("");
             cookies[a].setMaxAge(0);

@@ -1,9 +1,9 @@
 package kz.edu.astanait.servlets;
 
-import kz.edu.astanait.controllers.ClubController;
-import kz.edu.astanait.models.Club;
-import kz.edu.astanait.models.Post;
-import kz.edu.astanait.rest.clients.ClubClient;
+import kz.edu.astanait.models.Event;
+import kz.edu.astanait.models.News;
+import kz.edu.astanait.rest.clients.EventClient;
+import kz.edu.astanait.rest.clients.NewsClient;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,16 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.Year;
 
-@WebServlet(name = "ClubServlet", urlPatterns = "/clubservlet")
-public class ClubServlet extends HttpServlet {
-
+@WebServlet(name = "NewsServlet", urlPatterns = "/newservlet")
+public class NewsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String btn = request.getParameter("btn");
         String author = "";
 
-        ClubClient cl = new ClubClient();
+        NewsClient cl = new NewsClient();
 
         if(request.getParameter("author").isEmpty())
         {
@@ -59,23 +57,23 @@ public class ClubServlet extends HttpServlet {
         String image = request.getParameter("image");
         String description = request.getParameter("desc");
 
-        Club obj = new Club(id, name, image, description, author, date);
+        News obj = new News(id, name, image, description, author, date);
 
         switch (btn)
         {
             case "add":
                 cl.add(obj);
-                request.setAttribute("msg", "New club added successfully.");
+                request.setAttribute("msg", "New News added successfully.");
                 break;
 
             case "update":
                 cl.update(obj);
-                request.setAttribute("msg", "Club updated successfully.");
+                request.setAttribute("msg", "News updated successfully.");
                 break;
 
             case "delete":
                 cl.delete(obj.getId());
-                request.setAttribute("msg", "Club deleted successfully.");
+                request.setAttribute("msg", "News deleted successfully.");
                 break;
         }
 
