@@ -7,22 +7,25 @@ public class User {
     private String firstName;
     private String lastName;
     private String groupName;
+    private int course;
 
-    public User(String email, String password,String firstName, String lastName, String groupName) {
+    public User(String email, String password,String firstName, String lastName, String groupName, int course) {
         setEmail(email);
         setPassword(password);
         setFirstName(firstName);
         setLastName(lastName);
         setGroupName(groupName);
+        setCourse(course);
     }
 
-    public User(int id, String email, String password,String firstName, String lastName, String groupName) {
+    public User(int id, String email, String password,String firstName, String lastName, String groupName, int course) {
         setId(id);
         setEmail(email);
         setPassword(password);
         setFirstName(firstName);
         setLastName(lastName);
         setGroupName(groupName);
+        setCourse(course);
     }
 
     public String getFirstName() {
@@ -75,5 +78,13 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getCourse() {
+        return course;
+    }
+
+    public void setCourse(int course) {
+        this.course = course;
     }
 }

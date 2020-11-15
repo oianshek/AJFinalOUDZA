@@ -49,6 +49,7 @@ public class UserController implements IController<User> {
             user.setGroupName(rs.getString("group_name"));
             user.setEmail(rs.getString("email"));
             user.setPassword(rs.getString("password"));
+            user.setCourse(rs.getInt("course"));
         }
         return user;
     }
@@ -69,6 +70,7 @@ public class UserController implements IController<User> {
                 user.setGroupName(rs.getString("group_name"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
+                user.setCourse(rs.getInt("course"));
                 return user;
 
             }

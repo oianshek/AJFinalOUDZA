@@ -4,68 +4,51 @@
 
 <html>
 <head>
-    <title>Astana IT University</title>
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-    <link rel="stylesheet" href="node_modules/mdbootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="node_modules/mdbootstrap/css/mdb.min.css">
-    <link rel="stylesheet" href="node_modules/mdbootstrap/css/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@600&family=Patua+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/mainstyle.css">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Main.css">
     <script>
         <%@include file="../js/javascript.js"%>
     </script>
+    <link href="https://fonts.googleapis.com/css2?family=Hind&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </head>
-<body class="d-flex flex-column h-100">
-<nav class="navbar navbar-inverse navbar-expand-lg" id="asd">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="${pageContext.request.contextPath}"><img style="width: 60px;" src="https://astanait.edu.kz/wp-content/uploads/2020/05/aitu-logo-white-2-300x154.png"></a>
-            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-        </div>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav navbar-nav">
-
-                <li><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
-
-                <li><a href="${pageContext.request.contextPath}/jsp/Sport.jsp">News</a></li>
-                <li><a href="${pageContext.request.contextPath}/jsp/Gadgets.jsp">Clubs</a></li>
-                <li><a href="${pageContext.request.contextPath}/jsp/Clothes.jsp">Events</a></li>
-
-                <c:if test="${cookie.user.value != null}">
-
-                </c:if>
-
+<body style="margin: 0;">
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="Main.html"><img src="${pageContext.request.contextPath}/images/logo.png" style="width: 150px;height: 75px;"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/clubservlet" style="text-align: center;">Clubs <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/eventservlet" style="text-align: center;">Events</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/newservlet" style="text-align: center;">News</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="${pageContext.request.contextPath}/userservlet" style="text-align: center;">Students</a>
+                </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <c:if test="${cookie.user.value != null}">
-                    <li><a href="<%=application.getContextPath()%>/jsp/Cart.jsp"><span class="glyphicon glyphicon-shopping-cart"></span>Cart</a></li>
-                </c:if>
-
-                <c:if test="${cookie.user.value.length()>0}">
-                    <li class="border border-primary"><a href="#" class="border border-primary"><span class="glyphicon glyphicon-user"></span> ${cookie.user.value}</a>  </li>
-                    <li><a href="${pageContext.request.contextPath }/logout" type="submit"> <span class="glyphicon glyphicon-user"></span>Logout</a></li>
-                </c:if>
-
-                <c:if test="${cookie.user.value == null}">
-                    <li><a href="<%=application.getContextPath()%>/jsp/loginregister.jsp"><span class="glyphicon glyphicon-user"></span> Authorize </a></li>
-                </c:if>
-
-            </ul>
-                <form class="navbar-form navbar-left">
-                    <div class="form-group searchBook">
-                        <input type="text" name="productName" id="spname" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="btn" name="search" id="sbtn" class="btn btn-default">Search</button>
-                </form>
         </div>
-    </div>
-</nav>
-<br><br><br>
+        <div class="login-logup" style="float: right;">
+            <c:if test="${cookie.user.value == null}">
+                <a href="${pageContext.request.contextPath}/jsp/login.jsp"><button type="button" class="btn btn-success">Log In</button></a>
+            </c:if>
+
+            <c:if test="${cookie.user.value.length()>0}">
+                <p style="font-size: 20px;">${cookie.user.value}</p>
+                <a href="${pageContext.request.contextPath}/logout"><button type="button" class="btn btn-danger">Log Out</button></a>
+            </c:if>
+        </div>
+    </nav>
+</header>

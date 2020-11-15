@@ -19,4 +19,5 @@
         </div>
     </div>
 </div>
+
 <%@include file="jsp/footer.jsp"%>
