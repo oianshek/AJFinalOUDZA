@@ -1,23 +1,36 @@
-<%@include file="jsp/header.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="list d-flex flex-column h-100">
-    <div class="container">
-        <h1 class="text-center">Welcome to Astana IT University portal</h1>
-        <div class="row">
-            <h4>
-                Astana IT University delivers digital transformation through teaching, research and successful innovation.
-                Therefore, firstly, on the basis of AITU, a system for creating and promoting innovations will be built,
-                which will make it possible to earn money on your intellectual product.
-                Secondly, measures will be taken to increase competitiveness in the global market for educational and research services,
-                which will consolidate our position in international rankings.
-                Thirdly, the availability of high-quality higher education will be ensured through the use of modern technologies,
-                including the Internet, which opens up unlimited opportunities for education.
-                Fourthly, quality educational content will be provided through the creation of specialized network resources embedded in university programs.
-                Thus, a modern digital educational environment will be created, and AITU will become a catalyst for the digital transformation of the entire Kazakh society.
-            </h4>
-        </div>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<html>
+<head>
+    <title>Club</title>
+    <script>
+        <%@include file="/js/javascript.js"%>
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Hind&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+
+    <link href="${pageContext.request.contextPath}/css/Main.css" rel="stylesheet">
+</head>
+<body>
+<%@include file="jsp/header.jsp"%>
+<div class="page-photo" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7)),url('${pageContext.request.contextPath}/images/aitu-e1589799195486.png');">
+    <div class="left-text">
+        <h1>Astana IT University</h1>
+    </div>
+    <div class="right-text">
+        <P>Astana IT University delivers digital transformation through teaching, research and successful innovation.</P>
     </div>
 </div>
 
+
 <%@include file="jsp/footer.jsp"%>
+
+
+</body>
+
+</html>

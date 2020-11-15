@@ -39,7 +39,16 @@ public class LoginServlet extends HttpServlet {
                     {
                         list.put("message", "success");
 
-                        Cookie userName = new Cookie("user", u.getEmail());
+                        Cookie userName;
+                        if(u.getFirstName().equals("admin"))
+                        {
+                            userName = new Cookie("user", "Administrator");
+                        }
+                        else
+                        {
+                            userName = new Cookie("user", u.getEmail());
+                        }
+
                         userName.setMaxAge(60*5*60);
                         response.addCookie(userName);
 

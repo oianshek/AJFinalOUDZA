@@ -1,5 +1,6 @@
 package kz.edu.astanait.servlets;
 
+import kz.edu.astanait.controllers.EventController;
 import kz.edu.astanait.models.Club;
 import kz.edu.astanait.models.Event;
 import kz.edu.astanait.models.Post;
@@ -15,14 +16,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @WebServlet(name = "EventServlet", urlPatterns = "/eventservlet")
 public class EventServlet extends HttpServlet {
+    private EventController cl = new EventController();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String btn = request.getParameter("btn");
         String author = "";
-
-        EventClient cl = new EventClient();
 
         if(request.getParameter("author").isEmpty())
         {
@@ -43,7 +44,7 @@ public class EventServlet extends HttpServlet {
         Date date;
         if(request.getParameter("date").isEmpty())
         {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
             java.util.Date d = new java.util.Date();
             date = Date.valueOf(formatter.format(d));
             //System.out.println(formatter.format(date));
@@ -83,5 +84,10 @@ public class EventServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        List<Event> list = cl.getAll();
+
+        request.setAttribute("events", list);
+
+        request.getRequestDispatcher("/jsp/events.jsp").forward(request, response);
     }
 }

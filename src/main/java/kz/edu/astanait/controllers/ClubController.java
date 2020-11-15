@@ -17,7 +17,7 @@ public class ClubController implements IController<Club> {
 
     @Override
     public void add(Club entity) throws BadRequestException {
-        String sql = "INSERT INTO club(name, image, description, author) "+
+        String sql = "INSERT INTO club(name, image, description, author, date) "+
                 "VALUES(?,?,?,?)";
 
         try {
@@ -27,6 +27,7 @@ public class ClubController implements IController<Club> {
             stmt.setString(2, entity.getImage());
             stmt.setString(3, entity.getDescription());
             stmt.setString(4, entity.getAuthor());
+
 
             stmt.execute();
         } catch (SQLException throwable) {

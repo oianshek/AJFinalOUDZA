@@ -1,12 +1,15 @@
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
-    <title>Main Page</title>
-    <link rel="stylesheet" type="text/css" href="Main.css">
+    <title>Club</title>
+    <script>
+        <%@include file="../js/javascript.js"%>
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Hind&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -15,7 +18,7 @@
     <style>
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             grid-column-gap: 20px;
             grid-row-gap: 20px;
             padding: 10px;
@@ -177,109 +180,50 @@
 
 </head>
 <body style="margin: 0;">
-<header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="Main.html"><img src="images/logo.png" style="width: 150px;height: 75px;"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="Clubs.html" style="text-align: center;">Clubs <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Events.html" style="text-align: center;">Events</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="News.html" style="text-align: center;">News</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="Students.html" style="text-align: center;">Students</a>
-                </li>
-            </ul>
-        </div>
-        <div class="login-logup" style="float: right;">
-            <div class="login-logup" style="float: right;">
-                <a href="Login.html"><button type="button" class="btn btn-success">Sign In</button></a>
-                <a href="Registration.html"><button type="button" class="btn btn-danger">Sign Up</button></a>
-            </div>
-        </div>
-    </nav>
-</header>
 
-
+<%@include file="header.jsp"%>
 
 <h1 style="text-align:center;">Clubs</h1>
 
 
 <div class="grid-button" style="margin-top: 10px;">
-    <button type="button" class="btn btn-info">Show</button>
     <button type="button" class="btn btn-success">Add</button>
 </div>
 
 
 <div class="grid">
-    <div class="box">
-        <img src="images/img-1.jpg">
-        <div class="box-content">
-            <h3 class="title">Williamson</h3>
-            <span class="post">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sapiente sint, nulla, nihil
-                    repudiandae commodi voluptatibus corrupti animi sequi aliquid magnam debitis, maxime quam recusandae
-                    harum esse fugiat. Itaque, culpa?</span>
-            <div style="margin-top: 10px;">
-                <button type="button" class="btn btn-secondary">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </div>
+    <c:forEach var="club" items="${requestScope.clubs}">
+        <div class="box">
+            <form action="${pageContext.request.contextPath}/clubservlet" method="post">
+                <img src="${club.image}">
+                <input type="text" name="image" style="display: none;" value="${club.image}">
+                <div class="box-content">
+                    <h3 class="title">${club.name}</h3>
+                    <input type="text" name="name" style="display: none;" value="${club.name}">
+
+                    <span class="post">${club.description}</span>
+                    <input type="text" name="description" style="display: none;" value="${club.description}">
+
+                    <br><h5>${club.author}</h5>
+                    <input type="text" name="author" style="display: none;" value="${club.author}">
+
+                    <input type="text" name="date" style="display: none;" value="${club.date}">
+
+                    <div style="margin-top: 10px;">
+                        <button type="button" class="btn btn-secondary" name="btn" value="update">Edit</button>
+                        <button type="button" class="btn btn-danger" name="btn" value="delete">Delete</button>
+                    </div>
+                </div>
+                <ul class="icon">
+                    <li><a href="#"><i class="fa fa-search"></i></a></li>
+                    <li><a href="#"><i class="fa fa-link"></i></a></li>
+                </ul>
+            </form>
         </div>
-        <ul class="icon">
-            <li><a href="#"><i class="fa fa-search"></i></a></li>
-            <li><a href="#"><i class="fa fa-link"></i></a></li>
-        </ul>
-    </div>
-    <div class="box">
-        <img src="images/img-2.jpg">
-        <div class="box-content">
-            <h3 class="title">Miranda Roy</h3>
-            <span class="post">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sapiente sint, nulla, nihil
-                    repudiandae commodi voluptatibus corrupti animi sequi aliquid magnam debitis, maxime quam recusandae
-                    harum esse fugiat. Itaque, culpa?</span>
-            <div style="margin-top: 10px;">
-                <button type="button" class="btn btn-secondary">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </div>
-        </div>
-        <ul class="icon">
-            <li><a href="#"><i class="fa fa-search"></i></a></li>
-            <li><a href="#"><i class="fa fa-link"></i></a></li>
-        </ul>
-    </div>
-    <div class="box">
-        <img src="images/img-3.jpg">
-        <div class="box-content">
-            <h3 class="title">Miranda Roy</h3>
-            <span class="post">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sapiente sint, nulla, nihil
-                        repudiandae commodi voluptatibus corrupti animi sequi aliquid magnam debitis, maxime quam recusandae
-                        harum esse fugiat. Itaque, culpa?</span>
-            <div style="margin-top: 10px;">
-                <button type="button" class="btn btn-secondary">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </div>
-        </div>
-        <ul class="icon">
-            <li><a href="#"><i class="fa fa-search"></i></a></li>
-            <li><a href="#"><i class="fa fa-link"></i></a></li>
-        </ul>
-    </div>
+    </c:forEach>
 </div>
 
-
-
-
-
-
-
-
+<%@include file="footer.jsp"%>
 
 </body>
 </html>

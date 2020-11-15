@@ -16,6 +16,7 @@ public class ClubRest {
     private final ClubController clubController = new ClubController();
 
     @GET
+    @Path("/getAll")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
         List<Club> club;

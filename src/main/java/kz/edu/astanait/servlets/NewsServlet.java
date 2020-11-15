@@ -1,5 +1,6 @@
 package kz.edu.astanait.servlets;
 
+import kz.edu.astanait.controllers.NewsController;
 import kz.edu.astanait.models.Event;
 import kz.edu.astanait.models.News;
 import kz.edu.astanait.rest.clients.EventClient;
@@ -14,14 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @WebServlet(name = "NewsServlet", urlPatterns = "/newservlet")
 public class NewsServlet extends HttpServlet {
+    private NewsController cl = new NewsController();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String btn = request.getParameter("btn");
         String author = "";
-
-        NewsClient cl = new NewsClient();
 
         if(request.getParameter("author").isEmpty())
         {
@@ -42,7 +43,7 @@ public class NewsServlet extends HttpServlet {
         Date date;
         if(request.getParameter("date").isEmpty())
         {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
             java.util.Date d = new java.util.Date();
             date = Date.valueOf(formatter.format(d));
             //System.out.println(formatter.format(date));
@@ -82,5 +83,10 @@ public class NewsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        List<News> list = cl.getAll();
+
+        request.setAttribute("news", list);
+
+        request.getRequestDispatcher("/jsp/news.jsp").forward(request, response);
     }
 }

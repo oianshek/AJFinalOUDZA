@@ -15,15 +15,15 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.time.Year;
+import java.util.List;
 
 @WebServlet(name = "ClubServlet", urlPatterns = "/clubservlet")
 public class ClubServlet extends HttpServlet {
+    private ClubController cl = new ClubController();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String btn = request.getParameter("btn");
         String author = "";
-
-        ClubClient cl = new ClubClient();
 
         if(request.getParameter("author").isEmpty())
         {
@@ -44,7 +44,7 @@ public class ClubServlet extends HttpServlet {
         Date date;
         if(request.getParameter("date").isEmpty())
         {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
             java.util.Date d = new java.util.Date();
             date = Date.valueOf(formatter.format(d));
             //System.out.println(formatter.format(date));
@@ -84,5 +84,10 @@ public class ClubServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        List<Club> list = cl.getAll();
+
+        request.setAttribute("clubs", list);
+
+        request.getRequestDispatcher("/jsp/club.jsp").forward(request, response);
     }
 }
