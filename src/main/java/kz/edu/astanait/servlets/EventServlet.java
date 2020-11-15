@@ -1,11 +1,7 @@
 package kz.edu.astanait.servlets;
 
 import kz.edu.astanait.controllers.EventController;
-import kz.edu.astanait.models.Club;
 import kz.edu.astanait.models.Event;
-import kz.edu.astanait.models.Post;
-import kz.edu.astanait.rest.clients.ClubClient;
-import kz.edu.astanait.rest.clients.EventClient;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,8 +54,9 @@ public class EventServlet extends HttpServlet {
         String name = request.getParameter("name");
         String image = request.getParameter("image");
         String description = request.getParameter("desc");
+        String strDate = String.valueOf(date);
 
-        Event obj = new Event(id, name, image, description, author, date);
+        Event obj = new Event(id, name, image, description, author, strDate);
 
         switch (btn)
         {

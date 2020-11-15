@@ -68,11 +68,6 @@
             <version>1.2</version>
         </dependency>
         <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>jsr311-api</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.webjars.bower</groupId>
             <artifactId>jquery.ajax</artifactId>
             <version>1.2.0</version>

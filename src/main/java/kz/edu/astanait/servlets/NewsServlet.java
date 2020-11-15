@@ -57,8 +57,9 @@ public class NewsServlet extends HttpServlet {
         String name = request.getParameter("name");
         String image = request.getParameter("image");
         String description = request.getParameter("desc");
+        String strDate = String.valueOf(date);
 
-        News obj = new News(id, name, image, description, author, date);
+        News obj = new News(id, name, image, description, author, strDate);
 
         switch (btn)
         {

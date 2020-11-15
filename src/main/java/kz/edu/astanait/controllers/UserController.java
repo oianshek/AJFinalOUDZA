@@ -8,28 +8,11 @@ import javax.ws.rs.BadRequestException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 public class UserController implements IController<User> {
-
-    @Override
-    public void add(User entity) throws BadRequestException {
-    }
-
-    @Override
-    public void update(User entity) throws BadRequestException {
-
-    }
-
-    @Override
-    public void delete(int id) throws BadRequestException {
-
-    }
-
-    @Override
-    public List getAll() throws BadRequestException {
-        return null;
-    }
 
     public User check(String email, String password) throws SQLException {
         String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
@@ -77,6 +60,25 @@ public class UserController implements IController<User> {
         } catch (SQLException ex) {
             throw new BadRequestException("Cannot run SQL statement: " + ex.getMessage());
         }
+        return null;
+    }
+
+    @Override
+    public void add(User entity) throws BadRequestException {
+    }
+
+    @Override
+    public void update(User entity) throws BadRequestException {
+
+    }
+
+    @Override
+    public void delete(int id) throws BadRequestException {
+
+    }
+
+    @Override
+    public List getAll() throws BadRequestException {
         return null;
     }
 

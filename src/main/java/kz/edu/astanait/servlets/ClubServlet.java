@@ -2,8 +2,6 @@ package kz.edu.astanait.servlets;
 
 import kz.edu.astanait.controllers.ClubController;
 import kz.edu.astanait.models.Club;
-import kz.edu.astanait.models.Post;
-import kz.edu.astanait.rest.clients.ClubClient;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.Year;
 import java.util.List;
 
 @WebServlet(name = "ClubServlet", urlPatterns = "/clubservlet")
@@ -58,8 +55,8 @@ public class ClubServlet extends HttpServlet {
         String name = request.getParameter("name");
         String image = request.getParameter("image");
         String description = request.getParameter("desc");
-
-        Club obj = new Club(id, name, image, description, author, date);
+        String strDate = String.valueOf(date);
+        Club obj = new Club(id, name, image, description, author,strDate);
 
         switch (btn)
         {

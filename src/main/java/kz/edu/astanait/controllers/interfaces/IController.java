@@ -1,9 +1,8 @@
 package kz.edu.astanait.controllers.interfaces;
 
-import kz.edu.astanait.models.User;
-
 import javax.ws.rs.BadRequestException;
-import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 public interface IController<T>{

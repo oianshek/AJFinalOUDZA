@@ -3,14 +3,11 @@ package kz.edu.astanait.controllers;
 import kz.edu.astanait.DB;
 import kz.edu.astanait.controllers.interfaces.IController;
 import kz.edu.astanait.models.Club;
-import kz.edu.astanait.models.Event;
 
 import javax.ws.rs.BadRequestException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ClubController implements IController<Club> {
@@ -18,8 +15,7 @@ public class ClubController implements IController<Club> {
     @Override
     public void add(Club entity) throws BadRequestException {
         String sql = "INSERT INTO club(name, image, description, author, date) "+
-                "VALUES(?,?,?,?)";
-
+                "VALUES(?,?,?,?,?)";
         try {
             PreparedStatement stmt = DB.getConnection().prepareStatement(sql);
 
@@ -27,7 +23,7 @@ public class ClubController implements IController<Club> {
             stmt.setString(2, entity.getImage());
             stmt.setString(3, entity.getDescription());
             stmt.setString(4, entity.getAuthor());
-
+            stmt.setString(5, entity.getDate());
 
             stmt.execute();
         } catch (SQLException throwable) {
@@ -85,7 +81,7 @@ public class ClubController implements IController<Club> {
                         rs.getString("image"),
                         rs.getString("description"),
                         rs.getString("author"),
-                        rs.getDate("date")));
+                        rs.getString("date")));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

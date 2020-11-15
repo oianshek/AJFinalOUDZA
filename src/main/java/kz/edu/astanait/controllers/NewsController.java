@@ -5,15 +5,12 @@ import kz.edu.astanait.controllers.interfaces.IController;
 import kz.edu.astanait.models.News;
 
 import javax.ws.rs.BadRequestException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
 
 public class NewsController implements IController<News> {
-
     @Override
     public void add(News entity) throws BadRequestException {
         String sql = "INSERT INTO news(name, image, description, date, author)"+
@@ -25,7 +22,7 @@ public class NewsController implements IController<News> {
             stmt.setString(1,entity.getName());
             stmt.setString(2,entity.getImage());
             stmt.setString(3,entity.getDescription());
-            stmt.setDate(4, entity.getDate());
+            stmt.setString(4, entity.getDate());
             stmt.setString(5, entity.getAuthor());
 
             stmt.execute();
@@ -45,7 +42,7 @@ public class NewsController implements IController<News> {
             stmt.setString(1, entity.getName());
             stmt.setString(2, entity.getImage());
             stmt.setString(3, entity.getDescription());
-            stmt.setDate(4, entity.getDate());
+            stmt.setString(4, entity.getDate());
             stmt.setString(5, entity.getAuthor());
             stmt.setInt(6, entity.getId());
 
@@ -84,7 +81,7 @@ public class NewsController implements IController<News> {
                         rs.getString("image"),
                         rs.getString("description"),
                         rs.getString("author"),
-                        rs.getDate("date")
+                        rs.getString("date")
                 ));
             }
         } catch (SQLException throwables) {

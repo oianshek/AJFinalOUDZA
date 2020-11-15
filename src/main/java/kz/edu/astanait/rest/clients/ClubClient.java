@@ -5,6 +5,7 @@ import kz.edu.astanait.models.Club;
 import kz.edu.astanait.rest.clients.interfaces.IClient;
 import org.glassfish.jersey.client.ClientConfig;
 
+import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
@@ -15,11 +16,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ClubClient implements IClient<Club> {
-    private String baseURI = "http://localhost:8080/AJ_Final_OUDZA_war_exploded/api/club/";
+    private final String baseURI = "http://localhost:8080/AJ_Final_OUDZA_war_exploded/api/club";
 
     public WebTarget getWebTarget() {
         ClientConfig config = new ClientConfig();
-        javax.ws.rs.client.Client client = ClientBuilder.newClient(config);
+        Client client = ClientBuilder.newClient(config);
         return client.target(baseURI);
     }
 
@@ -42,7 +43,7 @@ public class ClubClient implements IClient<Club> {
     @Override
     public List<Club> getAll() {
         WebTarget target = getWebTarget();
-        String json = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
+        String json = target.path("/getAll").request(MediaType.APPLICATION_JSON).get(String.class);
 
         Gson gson = new Gson();
         Club[] clubs = gson.fromJson(json, Club[].class);
