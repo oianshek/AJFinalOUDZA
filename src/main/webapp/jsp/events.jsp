@@ -40,9 +40,8 @@
 
 <h1 style="text-align:center;">Events</h1>
 <div class="grid-button" style="margin-top: 10px;">
-    <c:if test="${event.author == 'Administrator'}">
         <button type="button" class="btn btn-success">Add</button>
-    </c:if>
+
 </div>
 <div class="cards">
     <c:forEach var="event" items="${requestScope.events}">
