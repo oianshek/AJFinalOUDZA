@@ -214,8 +214,20 @@
                 margin: 0 0 30px;
             }
         }
-    </style>
+        body{
+            display: flex;
+            flex-direction: column;
 
+            min-height: 100vh;
+        }
+
+        footer{
+            margin-top: auto;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script><%@include file="/js/addScript.js"%></script>
 </head>
 <body class="d-flex flex-column h-100" style="margin: 0;">
 
@@ -228,17 +240,48 @@
 <h1 style="text-align:center;">Clubs</h1>
 
 
-<div class="grid-button" style="margin-top: 10px;">
+<div class="text-center grid-button" style="margin-top: 10px;">
     <c:if test="${cookie.user.value != null}">
-        <button type="button" class="btn btn-success">Add</button>
+        <button style="width: 20%" id="addd" type="button" class="btn btn-success">Add</button>
     </c:if>
 </div>
 
-<p>${requestScope.msg}</p>
+
 <div class="grid mb-5">
+    <div class="card add" style="display: none;">
+        <div class="card-header">
+            New Club
+        </div>
+        <div class="card-body">
+            <form action="${pageContext.request.contextPath}/clubservlet" method="post">
+                <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+                <jsp:useBean id="now" class="java.util.Date" />
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Title</label>
+                    <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" name="desc" class="form-control" id="description" placeholder="Description">
+                </div>
+                <div class="form-group">
+                    <label for="image">Description</label>
+                    <input type="text" name="image" class="form-control" id="image" placeholder="Image URL">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="author" readonly class="form-control" id="author" value="${cookie.user.value}">
+                </div>
+                <div class="form-check">
+                    <input type="text" name="date" class="form-check-input" id="date" value="<fmt:formatDate pattern = "yyyy-MM-dd" value = "${now}" />">
+                    <label class="form-check-label" for="date">Check me out</label>
+                </div>
+
+                <button type="submit" class="mt-4 btn btn-primary" name="btn" value="Add">Add</button>
+            </form>
+        </div>
+    </div>
     <c:forEach var="row" items="${result.rows}">
         <div class="box">
-
             <img src="${row.image}">
             <input type="text" name="image" style="display: none;" value="${row.image}">
             <div class="box-content">
@@ -264,7 +307,8 @@
                 <form action="<c:url value="/clubservlet"/>" method="post">
                     <c:if test="${cookie.user.value.equals(row.author) || cookie.user.value.equals('Administrator')}">
                         <div style="margin-top: 10px">
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <input type="number" name="id" style="display: none" value="${row.id}">
+                            <button value="Delete" name="btn" type="submit" class="delete btn btn-danger">Delete</button>
                         </div>
                     </c:if>
                 </form>

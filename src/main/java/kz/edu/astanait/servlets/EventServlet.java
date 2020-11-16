@@ -1,6 +1,7 @@
 package kz.edu.astanait.servlets;
 
 import kz.edu.astanait.controllers.EventController;
+import kz.edu.astanait.models.Club;
 import kz.edu.astanait.models.Event;
 import kz.edu.astanait.rest.clients.EventClient;
 
@@ -19,62 +20,37 @@ import java.util.List;
 public class EventServlet extends HttpServlet {
     EventClient eventClient = new EventClient();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id;
+        Event obj;
         String btn = request.getParameter("btn");
-        String author = "";
 
-        if(request.getParameter("author").isEmpty())
-        {
-            Cookie[] cookies = request.getCookies();
-            for(int i = 0; i < cookies.length; i++)
+        if(!btn.equals("Delete")){
+            String author = request.getParameter("author");
+            String date = request.getParameter("date");
+            String name = request.getParameter("name");
+            String image = request.getParameter("image");
+            String description = request.getParameter("desc");
+
+            obj =  new Event(name, image, description, author,date);
+
+            switch (btn)
             {
-                if(cookies[i].getName().equals("user"))
-                {
-                    author = cookies[i].getValue();
-                }
+                case "Add":
+                    eventClient.add(obj);
+                    doGet(request,response);
+                    break;
+                case "Update":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    obj.setId(id);
+                    eventClient.update(obj);
+                    doGet(request,response);
+                    break;
             }
+        }else{
+            id = Integer.parseInt(request.getParameter("id"));
+            eventClient.delete(id);
+            doGet(request,response);
         }
-        else
-        {
-            author = request.getParameter("author");
-        }
-
-        Date date;
-        if(request.getParameter("date").isEmpty())
-        {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-            java.util.Date d = new java.util.Date();
-            date = Date.valueOf(formatter.format(d));
-            //System.out.println(formatter.format(date));
-        }
-        else
-        {
-            date = Date.valueOf(request.getParameter("date"));
-        }
-
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String image = request.getParameter("image");
-        String description = request.getParameter("desc");
-        String strDate = String.valueOf(date);
-
-        Event obj = new Event(id, name, image, description, author, strDate);
-
-        switch (btn)
-        {
-            case "Add":
-                eventClient.add(obj);
-                doGet(request,response);
-                break;
-            case "Update":
-                eventClient.update(obj);
-                doGet(request,response);
-                break;
-            case "Delete":
-                eventClient.delete(obj.getId());
-                doGet(request,response);
-                break;
-        }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

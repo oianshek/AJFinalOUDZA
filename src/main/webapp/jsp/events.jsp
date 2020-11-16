@@ -41,6 +41,9 @@
         }
 
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script><%@include file="/js/addScript.js"%></script>
 </head>
 <body class="d-flex flex-column h-100" style="margin: 0;">
 
@@ -51,12 +54,44 @@
 </s:query>
 
 <h1 style="text-align:center;">Events</h1>
-<div class="grid-button" style="margin-top: 10px;">
+<div class=" text-center grid-button" style="margin-top: 10px;">
     <c:if test="${cookie.user.value != null}">
-        <button type="button" class="btn btn-success">Add</button>
+        <button style="width: 20%" id="addd" type="button" class="btn btn-success">Add</button>
     </c:if>
 </div>
 <div class="cards mb-5">
+    <div class="card add" style="display: none;">
+        <div class="card-header">
+            New Event
+        </div>
+        <div class="card-body">
+            <form action="${pageContext.request.contextPath}/eventservlet" method="post">
+                <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+                <jsp:useBean id="now" class="java.util.Date" />
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Title</label>
+                    <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" name="desc" class="form-control" id="description" placeholder="Description">
+                </div>
+                <div class="form-group">
+                    <label for="image">Description</label>
+                    <input type="text" name="image" class="form-control" id="image" placeholder="Image URL">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="author" readonly class="form-control" id="author" value="${cookie.user.value}">
+                </div>
+                <div class="form-check">
+                    <input type="text" name="date" class="form-check-input" id="date" value="<fmt:formatDate pattern = "yyyy-MM-dd"
+         value = "${now}" />">
+                    <label class="form-check-label" for="date">Check me out</label>
+                </div>
+                <button type="submit" class="mt-4 btn btn-primary" name="btn" value="Add">Add</button>
+            </form>
+        </div>
+    </div>
     <c:forEach var="row" items="${result.rows}">
         <div class="card">
 
@@ -65,7 +100,7 @@
                 </div>
                 <div class="card-body">
                     <form action="${pageContext.request.contextPath}/jsp/editData.jsp" method="post">
-                        <img src="${pageContext.request.contextPath}/images/talent.jpg" style="width: 300px; border-radius: 15px">
+                        <img src="${row.image}" style="width: 300px; border-radius: 15px">
                         <h5 class="mt-3 card-title">${row.name}</h5>
                         <p class="card-text">${row.description}</p>
                         <p class="card-text">${row.date}</p>
@@ -86,8 +121,9 @@
                     </form>
                     <form action="<c:url value="/eventservlet"/>" method="post">
                         <c:if test="${cookie.user.value.equals(row.author) || cookie.user.value.equals('Administrator')}">
-                            <div style="margin-top: 10px;">
-                                <button type="button" class="btn btn-danger ">Delete</button>
+                            <div style="margin-top: 10px">
+                                <input type="number" name="id" style="display: none" value="${row.id}">
+                                <button value="Delete" name="btn" type="submit" class="delete btn btn-danger">Delete</button>
                             </div>
                         </c:if>
                     </form>

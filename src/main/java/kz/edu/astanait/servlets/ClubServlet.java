@@ -17,65 +17,42 @@ public class ClubServlet extends HttpServlet {
     ClubClient clubClient = new ClubClient();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id;
+        Club obj;
         String btn = request.getParameter("btn");
-        String author = "";
 
-        if(request.getParameter("author").isEmpty())
-        {
-            Cookie[] cookies = request.getCookies();
-            for(int i = 0; i < cookies.length; i++)
+        if(!btn.equals("Delete")){
+            String author = request.getParameter("author");
+            String date = request.getParameter("date");
+            String name = request.getParameter("name");
+            String image = request.getParameter("image");
+            String description = request.getParameter("desc");
+
+            obj =  new Club(name, image, description, author,date);
+
+            switch (btn)
             {
-                if(cookies[i].getName().equals("user"))
-                {
-                    author = cookies[i].getValue();
-                }
+                case "Add":
+                    clubClient.add(obj);
+                    doGet(request,response);
+                    break;
+                case "Update":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    obj.setId(id);
+                    clubClient.update(obj);
+                    doGet(request,response);
+                    break;
             }
-        }
-        else
-        {
-            author = request.getParameter("author");
-        }
-
-        Date date;
-        if(request.getParameter("date").isEmpty())
-        {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-            java.util.Date d = new java.util.Date();
-            date = Date.valueOf(formatter.format(d));
-            //System.out.println(formatter.format(date));
-        }
-        else
-        {
-            date = Date.valueOf(request.getParameter("date"));
-        }
-
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String image = request.getParameter("image");
-        String description = request.getParameter("desc");
-        String strDate = String.valueOf(date);
-        Club obj = new Club(id, name, image, description, author,strDate);
-
-        switch (btn)
-        {
-            case "Add":
-                clubClient.add(obj);
-                request.setAttribute("msg", "New club added successfully.");
-                break;
-            case "Update":
-                clubClient.update(obj);
+        }else{
+                id = Integer.parseInt(request.getParameter("id"));
+                clubClient.delete(id);
                 doGet(request,response);
-                break;
-            case "Delete":
-                clubClient.delete(obj.getId());
-                request.setAttribute("msg", "Club deleted successfully.");
-                break;
         }
 
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("jsp/confirmation.jsp");
     }
 }

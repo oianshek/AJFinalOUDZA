@@ -13,5 +13,5 @@ public interface IUserController<T> {
     List<T> getByGroup(String g) throws BadRequestException;
     List<T> getByCourse(int c) throws BadRequestException;
     List<T> getByMajor(String m) throws BadRequestException;
-
+    List<T> getByName(String m) throws BadRequestException;
 }

@@ -171,4 +171,30 @@ public class UserController implements IUserController<User> {
         return users;
     }
 
+    @Override
+    public List<User> getByName(String n) throws BadRequestException {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE fname LIKE ? AND id != 1";
+        try {
+            PreparedStatement pstmt = DB.getConnection().prepareStatement(sql);
+            //ResultSet rs = stmt.executeQuery(sql);
+            pstmt.setString(1, "%" + n + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()){
+                users.add(new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("fname"),
+                        rs.getString("lname"),
+                        rs.getString("group_name"),
+                        rs.getInt("course")
+                ));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
+    }
 }
