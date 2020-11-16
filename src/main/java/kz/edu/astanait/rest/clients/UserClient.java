@@ -42,7 +42,7 @@ public class UserClient implements IClient<User> {
     @Override
     public List<User> getAll() {
         WebTarget target = getWebTarget();
-        String json = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
+        String json = target.path("/getAll").request(MediaType.APPLICATION_JSON).get(String.class);
 
         Gson gson = new Gson();
         User[] entity = gson.fromJson(json, User[].class);

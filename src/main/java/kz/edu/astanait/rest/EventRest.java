@@ -14,6 +14,7 @@ public class EventRest {
     private final EventController eventController = new EventController();
 
     @GET
+    @Path("getAll")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
         List<Event> event;

@@ -16,7 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class EventClient implements IClient<Event> {
-    private String baseURI = "http://localhost:8080/AJ_Final_OUDZA_war_exploded/api/event/";
+    private String baseURI = "http://localhost:8080/AJ_Final_OUDZA_war_exploded/api/event";
 
     public WebTarget getWebTarget() {
         ClientConfig config = new ClientConfig();
@@ -43,7 +43,7 @@ public class EventClient implements IClient<Event> {
     @Override
     public List<Event> getAll() {
         WebTarget target = getWebTarget();
-        String json = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
+        String json = target.path("/getAll").request(MediaType.APPLICATION_JSON).get(String.class);
 
         Gson gson = new Gson();
         Event[] entity = gson.fromJson(json, Event[].class);

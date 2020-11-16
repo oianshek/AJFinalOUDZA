@@ -1,8 +1,10 @@
 package kz.edu.astanait.models;
 
-import java.sql.Date;
-
 public class News extends Post {
+
+    public News(){
+        super();
+    }
 
     public News(String name, String image, String description, String author, String date) {
         super(name, image, description, author, date);
