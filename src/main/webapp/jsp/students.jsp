@@ -21,7 +21,7 @@
     <button type="button" class="btn btn-info">Show all</button>
 
     <form class="form-inline my-2 my-lg-0" style="margin-bottom: 10px;">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control mr-sm-2" type="search" required placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 
@@ -56,12 +56,14 @@
 
         <div class="col-md-3">
             <p>By Group:</p>
-            <label for="Group by">Write group name here:</label><br><br>
-            <!-- <input type="radio" id="Group by" name="groupby" value="Group by"> -->
-            <input type="text" id="Group by" name="groupby">
+<%--            <label for="Group by">Write group name here:</label><br><br>--%>
+            <input type="radio" id="Group by" name="groupby" value="Group by">
+<%--            <input type="text" id="Group by" name="groupby">--%>
         </div>
     </form>
 </div>
+
+
 
 <%@include file="footer.jsp"%>
 

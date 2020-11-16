@@ -2,18 +2,19 @@ package kz.edu.astanait.controllers;
 
 import kz.edu.astanait.DB;
 import kz.edu.astanait.controllers.interfaces.IController;
+import kz.edu.astanait.controllers.interfaces.IUserController;
+import kz.edu.astanait.models.News;
 import kz.edu.astanait.models.User;
 
 import javax.ws.rs.BadRequestException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UserController implements IController<User> {
+public class UserController implements IUserController<User> {
 
+    @Override
     public User check(String email, String password) throws SQLException {
         String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
 
@@ -37,6 +38,7 @@ public class UserController implements IController<User> {
         return user;
     }
 
+    @Override
     public User getById(int id) {
         String sql = "SELECT * FROM users WHERE id = ?";
 
@@ -64,22 +66,109 @@ public class UserController implements IController<User> {
     }
 
     @Override
-    public void add(User entity) throws BadRequestException {
+    public List<User> getByGroup(String group) throws BadRequestException {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE group_name LIKE ? AND id != 1";
+        try {
+            PreparedStatement pstmt = DB.getConnection().prepareStatement(sql);
+            //ResultSet rs = stmt.executeQuery(sql);
+            pstmt.setString(1, "%" + group + "%");
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()){
+                users.add(new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("fname"),
+                        rs.getString("lname"),
+                        rs.getString("group_name"),
+                        rs.getInt("course")
+                ));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
     }
 
     @Override
-    public void update(User entity) throws BadRequestException {
+    public List<User> getByCourse(int c) throws BadRequestException {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE course LIKE ? AND id != 1";
+        try {
+            PreparedStatement pstmt = DB.getConnection().prepareStatement(sql);
+            //ResultSet rs = stmt.executeQuery(sql);
+            pstmt.setString(1, "%" + c + "%");
+            ResultSet rs = pstmt.executeQuery();
 
+            while (rs.next()){
+                users.add(new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("fname"),
+                        rs.getString("lname"),
+                        rs.getString("group_name"),
+                        rs.getInt("course")
+                ));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
     }
 
     @Override
-    public void delete(int id) throws BadRequestException {
+    public List<User> getByMajor(String m) throws BadRequestException {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE group_name LIKE ? AND id != 1";
+        try {
+            PreparedStatement pstmt = DB.getConnection().prepareStatement(sql);
+            //ResultSet rs = stmt.executeQuery(sql);
+            pstmt.setString(1, "%" + m + "%");
+            ResultSet rs = pstmt.executeQuery();
 
+            while (rs.next()){
+                users.add(new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("fname"),
+                        rs.getString("lname"),
+                        rs.getString("group_name"),
+                        rs.getInt("course")
+                ));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
     }
 
     @Override
     public List getAll() throws BadRequestException {
-        return null;
+        List<User> users = new ArrayList<>();
+
+        try {
+            Statement stmt = DB.getConnection().createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE id != 1");
+
+            while (rs.next()){
+                users.add(new User(
+                        rs.getInt("id"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getString("fname"),
+                        rs.getString("lname"),
+                        rs.getString("group_name"),
+                        rs.getInt("course")
+                ));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return users;
     }
 
 }
