@@ -10,6 +10,10 @@ public class Post {
     private String author;
     private String date;
 
+    public Post(){
+
+    }
+
     public Post(String name, String image, String description, String author, String date){
         setName(name);
         setImage(image);

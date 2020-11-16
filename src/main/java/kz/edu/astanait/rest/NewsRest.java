@@ -15,6 +15,7 @@ public class NewsRest {
     private final NewsController newsController = new NewsController();
 
     @GET
+    @Path("getAll")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
         List<News> news;

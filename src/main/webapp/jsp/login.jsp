@@ -47,6 +47,7 @@
         });
     });
     </script>
+    <title>Login AITU</title>
 </head>
 <body>
 <div class="wrapper">
@@ -62,10 +63,6 @@
             <label>Password</label>
         </div>
         <div class="content">
-            <div class="checkbox">
-                <input type="checkbox" id="remember-me">
-                <label for="remember-me">Remember me</label>
-            </div>
             <div class="pass-link">
                 <a href="#">Forgot password?</a>
             </div>

@@ -33,7 +33,7 @@ public class ClubController implements IController<Club> {
 
     @Override
     public void update(Club entity) throws BadRequestException {
-        String sql = "update club set name = ?, image = ?, description = ?, author = ? where id = ?";
+        String sql = "update club set name = ?, image = ?, description = ?, author = ?, date = ? where id = ?";
         PreparedStatement stmt = null;
         try {
 
@@ -43,7 +43,8 @@ public class ClubController implements IController<Club> {
             stmt.setString(2, entity.getImage());
             stmt.setString(3, entity.getDescription());
             stmt.setString(4, entity.getAuthor());
-            stmt.setInt(5, entity.getId());
+            stmt.setString(5,entity.getDate());
+            stmt.setInt(6, entity.getId());
 
             stmt.execute();
 

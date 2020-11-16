@@ -14,8 +14,8 @@ public class EventController implements IController<Event> {
 
     @Override
     public void add(Event entity) throws BadRequestException {
-        String sql = "INSERT INTO events(name, image, description, date, author)"+
-                "VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO event(name, image, description, date, author)"+
+                " VALUES(?,?,?,?,?)";
 
         try {
             PreparedStatement stmt = DB.getConnection().prepareStatement(sql);

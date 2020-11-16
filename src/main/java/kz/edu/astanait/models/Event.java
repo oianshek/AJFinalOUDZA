@@ -4,6 +4,10 @@ import java.sql.Date;
 
 public class Event extends Post {
 
+    public Event(){
+        super();
+    }
+
     public Event(String name, String image, String description, String author, String date) {
         super(name, image, description, author, date);
     }

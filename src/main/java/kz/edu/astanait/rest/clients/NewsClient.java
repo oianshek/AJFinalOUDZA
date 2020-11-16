@@ -43,7 +43,7 @@ public class NewsClient implements IClient<News> {
     @Override
     public List<News> getAll() {
         WebTarget target = getWebTarget();
-        String json = target.request().accept(MediaType.APPLICATION_JSON).get(String.class);
+        String json = target.path("/getAll").request(MediaType.APPLICATION_JSON).get(String.class);
 
         Gson gson = new Gson();
         News[] entity = gson.fromJson(json, News[].class);
