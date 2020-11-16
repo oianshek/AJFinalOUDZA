@@ -19,9 +19,9 @@ public class ClubRest {
     @Path("/getAll")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll() {
-        List<Club> club;
+        List<Club> clubs;
         try {
-            club = clubController.getAll();
+            clubs = clubController.getAll();
         } catch (BadRequestException e) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
@@ -29,7 +29,7 @@ public class ClubRest {
                     .build();
         }
         return Response
-                .ok(club)
+                .ok(clubs)
                 .build();
     }
 
