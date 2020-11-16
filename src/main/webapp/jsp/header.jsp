@@ -1,4 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<s:setDataSource var = "snapshot" driver = "com.mysql.cj.jdbc.Driver"
+                 url = "jdbc:mysql://localhost:3306/unik_portal?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
+                 user = "root"  password = ""/>
+
 <link href="${pageContext.request.contextPath}/css/Main.css" rel="stylesheet">
 
 <header>
@@ -12,19 +18,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/clubservlet"
+                    <a class="nav-link" href="${pageContext.request.contextPath}/jsp/club.jsp"
                        style="text-align: center;">Clubs <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/eventservlet"
+                    <a class="nav-link" href="${pageContext.request.contextPath}/jsp/events.jsp"
                        style="text-align: center;">Events</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/newservlet"
+                    <a class="nav-link" href="${pageContext.request.contextPath}/jsp/news.jsp"
                        style="text-align: center;">News</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/userservlet"
+                    <a class="nav-link" href="${pageContext.request.contextPath}/jsp/students.jsp"
                        style="text-align: center;">Students</a>
                 </li>
             </ul>
@@ -48,10 +54,6 @@
                     </li>
                 </c:if>
             </ul>
-        </div>
-        <div class="login-logup" style="float: right;">
-
-
         </div>
     </nav>
 </header>

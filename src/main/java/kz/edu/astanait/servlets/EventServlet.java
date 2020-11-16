@@ -2,6 +2,7 @@ package kz.edu.astanait.servlets;
 
 import kz.edu.astanait.controllers.EventController;
 import kz.edu.astanait.models.Event;
+import kz.edu.astanait.rest.clients.EventClient;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @WebServlet(name = "EventServlet", urlPatterns = "/eventservlet")
 public class EventServlet extends HttpServlet {
-    private EventController cl = new EventController();
+    EventClient eventClient = new EventClient();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String btn = request.getParameter("btn");
         String author = "";
@@ -60,31 +61,23 @@ public class EventServlet extends HttpServlet {
 
         switch (btn)
         {
-            case "add":
-                cl.add(obj);
-                request.setAttribute("msg", "New Event added successfully.");
+            case "Add":
+                eventClient.add(obj);
+                doGet(request,response);
                 break;
-
-            case "update":
-                cl.update(obj);
-                request.setAttribute("msg", "Event updated successfully.");
+            case "Update":
+                eventClient.update(obj);
+                doGet(request,response);
                 break;
-
-            case "delete":
-                cl.delete(obj.getId());
-                request.setAttribute("msg", "Event deleted successfully.");
+            case "Delete":
+                eventClient.delete(obj.getId());
+                doGet(request,response);
                 break;
         }
 
-        request.getRequestDispatcher("/").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        List<Event> list = cl.getAll();
-
-        request.setAttribute("events", list);
-
-        request.getRequestDispatcher("/jsp/events.jsp").forward(request, response);
+        response.sendRedirect("jsp/confirmation.jsp");
     }
 }

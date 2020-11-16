@@ -33,7 +33,7 @@ public class NewsController implements IController<News> {
 
     @Override
     public void update(News entity) throws BadRequestException {
-        String sql = "UPDATE news SET name = ?, image = ?, description = ?, date = ?, author = ?" +
+        String sql = "UPDATE news SET name = ?, image = ?, description = ?" +
                 " WHERE id = ?";
 
         try {
@@ -41,10 +41,8 @@ public class NewsController implements IController<News> {
 
             stmt.setString(1, entity.getName());
             stmt.setString(2, entity.getImage());
-            stmt.setString(3, entity.getDescription());
-            stmt.setString(4, entity.getDate());
-            stmt.setString(5, entity.getAuthor());
-            stmt.setInt(6, entity.getId());
+            stmt.setString(3, entity.getDescription());;
+            stmt.setInt(4, entity.getId());
 
             stmt.execute();
         } catch (SQLException throwables) {

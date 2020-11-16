@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Main Page</title>
     <link rel="stylesheet" type="text/css" href="Main.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
@@ -12,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-
+    <title>Events</title>
     <style>
         .cards {
             display: grid;
@@ -31,49 +30,71 @@
             padding: 20px;
         }
 
+        body{
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        footer{
+            margin-top: auto;
+        }
+
     </style>
 </head>
-<body style="margin: 0;">
+<body class="d-flex flex-column h-100" style="margin: 0;">
 
 <%@include file="header.jsp"%>
 
+<s:query dataSource = "${snapshot}" var = "result">
+    SELECT * FROM event;
+</s:query>
 
 <h1 style="text-align:center;">Events</h1>
 <div class="grid-button" style="margin-top: 10px;">
+    <c:if test="${cookie.user.value != null}">
         <button type="button" class="btn btn-success">Add</button>
-
+    </c:if>
 </div>
-<div class="cards">
-    <c:forEach var="event" items="${requestScope.events}">
+<div class="cards mb-5">
+    <c:forEach var="row" items="${result.rows}">
         <div class="card">
-            <form action="${pageContext.request.contextPath}/eventservlet" method="post">
+
                 <div class="card-header">
                     Featured
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">${event.name}</h5>
-                    <input type="text" name="name" style="display: none;" value="${event.name}">
+                    <form action="${pageContext.request.contextPath}/jsp/editData.jsp" method="post">
+                        <img src="${pageContext.request.contextPath}/images/talent.jpg" style="width: 300px; border-radius: 15px">
+                        <h5 class="mt-3 card-title">${row.name}</h5>
+                        <p class="card-text">${row.description}</p>
+                        <p class="card-text">${row.date}</p>
 
-                    <p class="card-text">${event.description}</p>
-                    <input type="text" name="name" style="display: none;" value="${event.description}">
+                        <input type="number" name="id" style="display: none" value="${row.id}">
+                        <input type="text" name="status" style="display: none;" value="Event">
+                        <input type="text" name="name" style="display: none;" value="${row.name}">
+                        <input type="text" name="description" style="display: none;" value="${row.description}">
+                        <input type="text" name="img" style="display: none;" value="${row.image}">
+                        <input type="text" name="author" style="display: none" value="${row.author}">
+                        <input type="text" name="date" style="display: none" value="${row.date}">
 
-                    <input type="text" name="author" style="display: none;" value="${event.author}">
-
-                    <input type="text" name="date" style="" value="${event.date}">
-
-                    <c:if test="${event.author == cookie.user.value}">
+                    <c:if test="${cookie.user.value.equals(row.author) || cookie.user.value.equals('Administrator')}">
                         <div style="margin-top: 10px;">
-                            <button type="button" class="btn btn-secondary ">Edit</button>
-                            <button type="button" class="btn btn-danger ">Delete</button>
+                            <button type="submit" class="btn btn-secondary">Edit</button>
                         </div>
                     </c:if>
+                    </form>
+                    <form action="<c:url value="/eventservlet"/>" method="post">
+                        <c:if test="${cookie.user.value.equals(row.author) || cookie.user.value.equals('Administrator')}">
+                            <div style="margin-top: 10px;">
+                                <button type="button" class="btn btn-danger ">Delete</button>
+                            </div>
+                        </c:if>
+                    </form>
                 </div>
-
-            </form>
         </div>
     </c:forEach>
 </div>
-
 
 <%@include file="footer.jsp"%>
 

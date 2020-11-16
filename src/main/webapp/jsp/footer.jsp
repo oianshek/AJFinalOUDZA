@@ -1,4 +1,4 @@
-<footer class="page-footer font-small teal pt-4" style="background-color: #263238;">
+<footer class="footer mt-auto py-3 page-footer font-small teal pt-4" style="background-color: #263238;">
     <div class="container text-center text-md-left">
         <div class="row">
             <div class="col-md-6 mt-md-0 mt-3" style="text-align: center;">

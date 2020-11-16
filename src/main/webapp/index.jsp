@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>Club</title>
+    <title>Welcome to AITU</title>
     <script>
         <%@include file="/js/javascript.js"%>
     </script>
@@ -16,7 +16,7 @@
 
     <link href="${pageContext.request.contextPath}/css/Main.css" rel="stylesheet">
 </head>
-<body>
+<body class="d-flex flex-column h-100">
 <%@include file="jsp/header.jsp"%>
 <div class="page-photo" style="background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.7)),url('${pageContext.request.contextPath}/images/aitu-e1589799195486.png');">
     <div class="left-text">

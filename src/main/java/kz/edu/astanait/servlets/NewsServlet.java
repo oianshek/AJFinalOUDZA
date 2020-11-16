@@ -16,7 +16,7 @@ import java.util.List;
 
 @WebServlet(name = "NewsServlet", urlPatterns = "/newservlet")
 public class NewsServlet extends HttpServlet {
-    private NewsController cl = new NewsController();
+    NewsClient newsClient = new NewsClient();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String btn = request.getParameter("btn");
         String author = "";
@@ -60,35 +60,25 @@ public class NewsServlet extends HttpServlet {
 
         switch (btn)
         {
-            case "add":
-                cl.add(obj);
+            case "Add":
+                newsClient.add(obj);
                 request.setAttribute("msg", "New News added successfully.");
                 break;
 
-            case "update":
-                cl.update(obj);
-                request.setAttribute("msg", "News updated successfully.");
+            case "Update":
+                newsClient.update(obj);
+                doGet(request,response);
                 break;
 
-            case "delete":
-                cl.delete(obj.getId());
+            case "Delete":
+                newsClient.delete(obj.getId());
                 request.setAttribute("msg", "News deleted successfully.");
                 break;
         }
 
-        request.getRequestDispatcher("/").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        List<News> list = cl.getAll();
-
-        request.setAttribute("news", list);
-
-        request.getRequestDispatcher("/jsp/news.jsp").forward(request, response);
-
-//        HttpSession session = request.getSession();
-//
-//        session.setAttribute("list",list);
+        response.sendRedirect("jsp/confirmation.jsp");
     }
 }

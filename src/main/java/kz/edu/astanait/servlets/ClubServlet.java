@@ -2,6 +2,7 @@ package kz.edu.astanait.servlets;
 
 import kz.edu.astanait.controllers.ClubController;
 import kz.edu.astanait.models.Club;
+import kz.edu.astanait.rest.clients.ClubClient;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,7 @@ import java.util.List;
 
 @WebServlet(name = "ClubServlet", urlPatterns = "/clubservlet")
 public class ClubServlet extends HttpServlet {
-    private ClubController cl = new ClubController();
+    ClubClient clubClient = new ClubClient();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String btn = request.getParameter("btn");
@@ -57,33 +58,24 @@ public class ClubServlet extends HttpServlet {
 
         switch (btn)
         {
-            case "add":
-                cl.add(obj);
+            case "Add":
+                clubClient.add(obj);
                 request.setAttribute("msg", "New club added successfully.");
                 break;
-
-            case "update":
-                cl.update(obj);
-                request.setAttribute("msg", "Club updated successfully.");
+            case "Update":
+                clubClient.update(obj);
+                doGet(request,response);
                 break;
-
-            case "delete":
-                cl.delete(obj.getId());
+            case "Delete":
+                clubClient.delete(obj.getId());
                 request.setAttribute("msg", "Club deleted successfully.");
                 break;
         }
 
-        request.getRequestDispatcher("/").forward(request, response);
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        List<Club> list = cl.getAll();
-
-        request.setAttribute("clubs", list);
-
-        request.getRequestDispatcher("/jsp/club.jsp").forward(request, response);
-
-
+        response.sendRedirect("index.jsp");
     }
 }

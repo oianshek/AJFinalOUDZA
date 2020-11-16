@@ -34,7 +34,7 @@ public class EventController implements IController<Event> {
 
     @Override
     public void update(Event entity) throws BadRequestException {
-        String sql = "UPDATE event SET name = ?, image = ?, description = ?, date = ?, author = ?" +
+        String sql = "UPDATE event SET name = ?, image = ?, description = ?, date = ?" +
                 " WHERE id = ?";
 
         try {
@@ -44,8 +44,7 @@ public class EventController implements IController<Event> {
             stmt.setString(2, entity.getImage());
             stmt.setString(3, entity.getDescription());
             stmt.setString(4, entity.getDate());
-            stmt.setString(5, entity.getAuthor());
-            stmt.setInt(6, entity.getId());
+            stmt.setInt(5, entity.getId());
 
             stmt.execute();
         } catch (SQLException throwables) {
