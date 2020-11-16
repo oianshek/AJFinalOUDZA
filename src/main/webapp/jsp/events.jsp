@@ -40,8 +40,9 @@
 
 <h1 style="text-align:center;">Events</h1>
 <div class="grid-button" style="margin-top: 10px;">
-        <button type="button" class="btn btn-success">Add</button>
-
+    <c:if test="${cookie.user.value != null}">
+    <button type="button" class="btn btn-success">Add</button>
+    </c:if>
 </div>
 <div class="cards">
     <c:forEach var="event" items="${requestScope.events}">
@@ -68,7 +69,6 @@
                         </div>
                     </c:if>
                 </div>
-
             </form>
         </div>
     </c:forEach>

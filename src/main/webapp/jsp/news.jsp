@@ -39,30 +39,31 @@
 
 <h1 style="text-align:center;">News</h1>
 <div class="grid-button" style="margin-top: 10px;">
-
-    <button type="button" class="btn btn-success">Add</button>
+    <c:if test="${cookie.user.value != null}">
+        <button type="button" class="btn btn-success">Add</button>
+    </c:if>
 </div>
 
 <div class="cards">
 
-    <c:forEach var="new" items="${requestScope.news}">
+    <c:forEach var="newss" items="${requestScope.news}">
         <div class="card">
-            <form action="${pageContext.request.contextPath}/eventservlet" method="post">
+            <form action="${pageContext.request.contextPath}/newservlet" method="post">
                 <div class="card-header">
                     Featured
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">${new.name}</h5>
-                    <input type="text" name="name" style="display: none;" value="${new.name}">
+                    <h5 class="card-title">${newss.name}</h5>
+                    <input type="text" name="name" style="display: none;" value="${newss.name}">
 
-                    <p class="card-text">${new.description}</p>
-                    <input type="text" name="name" style="display: none;" value="${new.description}">
+                    <p class="card-text">${newss.description}</p>
+                    <input type="text" name="name" style="display: none;" value="${newss.description}">
 
-                    <input type="text" name="author" style="display: none;" value="${new.author}">
+                    <input type="text" name="author" style="display: none;" value="${newss.author}">
 
-                    <input type="text" name="date" style="" value="${new.date}">
+                    <input type="text" name="date" style="" value="${newss.date}">
 
-                    <c:if test="${new.author == cookie.user.value}">
+                    <c:if test="${newss.author == cookie.user.value}">
                         <div style="margin-top: 10px;">
                             <button type="button" class="btn btn-secondary ">Edit</button>
                             <button type="button" class="btn btn-danger ">Delete</button>

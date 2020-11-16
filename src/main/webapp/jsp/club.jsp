@@ -187,12 +187,13 @@
 
 
 <div class="grid-button" style="margin-top: 10px;">
-    <button type="button" class="btn btn-success">Add</button>
+    <c:if test="${cookie.user.value != null}">
+        <button type="button" class="btn btn-success">Add</button>
+    </c:if>
 </div>
 
-
+<p>${requestScope.msg}</p>
 <div class="grid">
-    <p>${requestScope.msg}</p>
     <c:forEach var="club" items="${requestScope.clubs}">
         <div class="box">
             <form action="${pageContext.request.contextPath}/clubservlet" method="post">
@@ -213,7 +214,7 @@
                     <c:if test="${event.author == cookie.user.value}">
                         <div style="margin-top: 10px;">
                             <button type="button" class="btn btn-secondary ">Edit</button>
-                            <button type="button" class="btn btn-danger ">Delete</button>
+                            <button type="button" class="btn btn-danger" value="">Delete</button>
                         </div>
                     </c:if>
                 </div>
