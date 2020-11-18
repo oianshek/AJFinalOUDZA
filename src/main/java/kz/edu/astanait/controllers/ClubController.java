@@ -1,16 +1,15 @@
 package kz.edu.astanait.controllers;
 
 import kz.edu.astanait.DB;
-import kz.edu.astanait.controllers.interfaces.IController;
+import kz.edu.astanait.controllers.interfaces.IPostController;
 import kz.edu.astanait.models.Club;
 
 import javax.ws.rs.BadRequestException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class ClubController implements IController<Club> {
+public class ClubController implements IPostController<Club> {
 
     @Override
     public void add(Club entity) throws BadRequestException {

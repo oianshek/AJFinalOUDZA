@@ -1,7 +1,5 @@
 package kz.edu.astanait.models;
 
-import java.sql.Date;
-
 public class Event extends Post {
 
     public Event(){

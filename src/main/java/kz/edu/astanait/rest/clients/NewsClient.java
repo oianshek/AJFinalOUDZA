@@ -1,7 +1,6 @@
 package kz.edu.astanait.rest.clients;
 
 import com.google.gson.Gson;
-import kz.edu.astanait.models.Club;
 import kz.edu.astanait.models.News;
 import kz.edu.astanait.rest.clients.interfaces.IClient;
 import org.glassfish.jersey.client.ClientConfig;

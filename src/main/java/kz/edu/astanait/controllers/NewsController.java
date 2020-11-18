@@ -1,16 +1,15 @@
 package kz.edu.astanait.controllers;
 
 import kz.edu.astanait.DB;
-import kz.edu.astanait.controllers.interfaces.IController;
+import kz.edu.astanait.controllers.interfaces.IPostController;
 import kz.edu.astanait.models.News;
 
 import javax.ws.rs.BadRequestException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
-public class NewsController implements IController<News> {
+public class NewsController implements IPostController<News> {
     @Override
     public void add(News entity) throws BadRequestException {
         String sql = "INSERT INTO news(name, image, description, date, author)"+

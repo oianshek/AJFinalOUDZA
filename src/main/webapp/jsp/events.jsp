@@ -77,11 +77,8 @@
                     <input type="text" name="desc" class="form-control" id="description" placeholder="Description">
                 </div>
                 <div class="form-group">
-                    <label for="image">Description</label>
+                    <label for="image">Image</label>
                     <input type="text" name="image" class="form-control" id="image" placeholder="Image URL">
-                </div>
-                <div class="form-group">
-                    <input type="text" name="author" readonly class="form-control" id="author" value="${cookie.user.value}">
                 </div>
                 <div class="form-check">
                     <input type="text" name="date" class="form-check-input" id="date" value="<fmt:formatDate pattern = "yyyy-MM-dd"

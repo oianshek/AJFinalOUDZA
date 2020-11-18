@@ -1,31 +1,26 @@
 package kz.edu.astanait.servlets;
 
-import kz.edu.astanait.controllers.NewsController;
-import kz.edu.astanait.models.Club;
-import kz.edu.astanait.models.Event;
 import kz.edu.astanait.models.News;
-import kz.edu.astanait.rest.clients.EventClient;
+import kz.edu.astanait.models.User;
 import kz.edu.astanait.rest.clients.NewsClient;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 @WebServlet(name = "NewsServlet", urlPatterns = "/newservlet")
 public class NewsServlet extends HttpServlet {
     NewsClient newsClient = new NewsClient();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        HttpSession session = request.getSession();
         int id;
         News obj;
         String btn = request.getParameter("btn");
 
         if(!btn.equals("Delete")){
-            String author = request.getParameter("author");
+            User user = (User) session.getAttribute("user");
+            String author = user.getEmail();
             String date = request.getParameter("date");
             String name = request.getParameter("name");
             String image = request.getParameter("image");

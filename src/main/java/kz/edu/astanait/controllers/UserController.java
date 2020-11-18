@@ -1,18 +1,15 @@
 package kz.edu.astanait.controllers;
 
 import kz.edu.astanait.DB;
-import kz.edu.astanait.controllers.interfaces.IController;
 import kz.edu.astanait.controllers.interfaces.IUserController;
-import kz.edu.astanait.models.News;
 import kz.edu.astanait.models.User;
 
 import javax.ws.rs.BadRequestException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class UserController implements IUserController<User> {
+public class UserController implements IUserController {
 
     @Override
     public User check(String email, String password) throws SQLException {

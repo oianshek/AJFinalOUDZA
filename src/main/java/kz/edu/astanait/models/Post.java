@@ -1,7 +1,5 @@
 package kz.edu.astanait.models;
 
-import java.util.Date;
-
 public class Post {
     private int id;
     private String name;

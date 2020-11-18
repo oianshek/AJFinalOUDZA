@@ -54,6 +54,7 @@ public class LoginServlet extends HttpServlet {
 
                         HttpSession sessions = request.getSession();
                         sessions.setAttribute("user", u);
+                        sessions.setMaxInactiveInterval(60*60);
                     }
                 } catch (SQLException throwables) {
                     list.put("message", "Sql error");

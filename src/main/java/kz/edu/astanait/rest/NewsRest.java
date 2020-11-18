@@ -1,7 +1,6 @@
 package kz.edu.astanait.rest;
 
 import kz.edu.astanait.controllers.NewsController;
-import kz.edu.astanait.models.Club;
 import kz.edu.astanait.models.News;
 
 import javax.ws.rs.*;

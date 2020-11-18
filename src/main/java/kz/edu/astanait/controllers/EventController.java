@@ -1,16 +1,15 @@
 package kz.edu.astanait.controllers;
 
 import kz.edu.astanait.DB;
-import kz.edu.astanait.controllers.interfaces.IController;
+import kz.edu.astanait.controllers.interfaces.IPostController;
 import kz.edu.astanait.models.Event;
 
 import javax.ws.rs.BadRequestException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
-public class EventController implements IController<Event> {
+public class EventController implements IPostController<Event> {
 
     @Override
     public void add(Event entity) throws BadRequestException {

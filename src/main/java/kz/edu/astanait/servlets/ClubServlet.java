@@ -1,28 +1,27 @@
 package kz.edu.astanait.servlets;
 
-import kz.edu.astanait.controllers.ClubController;
 import kz.edu.astanait.models.Club;
+import kz.edu.astanait.models.User;
 import kz.edu.astanait.rest.clients.ClubClient;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.List;
 
 @WebServlet(name = "ClubServlet", urlPatterns = "/clubservlet")
 public class ClubServlet extends HttpServlet {
     ClubClient clubClient = new ClubClient();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
         int id;
         Club obj;
         String btn = request.getParameter("btn");
 
         if(!btn.equals("Delete")){
-            String author = request.getParameter("author");
+            User user = (User) session.getAttribute("user");
+            String author = user.getEmail();
             String date = request.getParameter("date");
             String name = request.getParameter("name");
             String image = request.getParameter("image");

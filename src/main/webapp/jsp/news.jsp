@@ -85,9 +85,6 @@
                     <label for="image">Description</label>
                     <input type="text" name="image" class="form-control" id="image" placeholder="Image URL">
                 </div>
-                <div class="form-group">
-                    <input type="text" name="author" readonly class="form-control" id="author" value="${cookie.user.value}">
-                </div>
                 <div class="form-check">
                     <input type="text" name="date" class="form-check-input" id="date" value="<fmt:formatDate pattern = "yyyy-MM-dd"
          value = "${now}" />">
@@ -104,9 +101,14 @@
                 </div>
                 <div class="card-body">
                     <form action="${pageContext.request.contextPath}/jsp/editData.jsp" method="post">
-                    <img src="${row.image}" alt="" style="width: 300px; border-radius: 15px">
-                    <h5 class="mt-3 card-title">${row.name}</h5>
-                    <p class="col-8 card-text">${row.description}</p>
+                        <img src="${row.image}" alt="" style="width: 300px; border-radius: 15px">
+                        <h5 class="mt-3 card-title">${row.name}</h5>
+                        <p class="col-8 card-text">${row.description}</p>
+                        <b>
+                            <p class="col-8 card-text">${row.date}</p>
+                            <p class="col-8 card-text">${row.author}</p>
+                        </b>
+
 
                         <input type="number" name="id" style="display: none" value="${row.id}">
                         <input type="text" name="status" style="display: none;" value="News">

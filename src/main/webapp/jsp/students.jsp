@@ -128,7 +128,7 @@
 
                     } else {
                         $("#searchmsg").addClass("bg-danger p-2 text-white");
-                        $("#searchmsg").text("No result find");
+                        $("#searchmsg").html("No result found");
                         //$("#errormsg").hide();
                         $("#searchmsg").show();
 

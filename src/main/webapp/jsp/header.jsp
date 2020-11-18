@@ -44,7 +44,7 @@
                 </li>
                 <c:if test="${cookie.user.value.length()>0}">
                     <li class="nav-item">
-                        <h5>${cookie.user.value}</h5>
+                        <h5>Welcome, ${cookie.user.value}</h5>
                     </li>
                     &nbsp;
                     <li class="nav-item">

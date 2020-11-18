@@ -2,7 +2,6 @@ package kz.edu.astanait.rest;
 
 import kz.edu.astanait.controllers.EventController;
 import kz.edu.astanait.models.Event;
-import kz.edu.astanait.models.News;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

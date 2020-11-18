@@ -268,9 +268,6 @@
                     <label for="image">Description</label>
                     <input type="text" name="image" class="form-control" id="image" placeholder="Image URL">
                 </div>
-                <div class="form-group">
-                    <input type="text" name="author" readonly class="form-control" id="author" value="${cookie.user.value}">
-                </div>
                 <div class="form-check">
                     <input type="text" name="date" class="form-check-input" id="date" value="<fmt:formatDate pattern = "yyyy-MM-dd" value = "${now}" />">
                     <label class="form-check-label" for="date">Check me out</label>

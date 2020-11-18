@@ -1,6 +1,5 @@
 package kz.edu.astanait.rest.clients.interfaces;
 
-import javax.ws.rs.BadRequestException;
 import java.util.List;
 
 public interface IClient<T> {
